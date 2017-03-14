@@ -1,0 +1,58 @@
+<!<!DOCTYPE>
+<html>
+<meta charset="utf-8">
+
+<head>
+    <title>promiseDemo</title>
+    <style>
+        .btn {
+            cursor: pointer;
+            border: #333333 solid 2px;
+            border-radius: 10px
+        }
+        
+        div {
+            margin: 20px;
+        }
+        
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="showList">nothing</div>
+    <div onclick="resolve()" class="btn">check the promise</div>
+    <script src="demo.js"></script>
+    <script>
+        function demo() {
+            const promise = new Promise((resolve) => {
+                resolve("succeed")
+            }, reject => {
+                reject()
+            })
+            return promise
+        }
+        var promise = demo()
+
+        function resolve() {
+            promise
+            // then中的函数就是上面resolve执行的函数，其中then函数的data是resolve传过来的参数，由上下文可知此时data = “succeed”
+                .then(
+                    (data) => {
+                        document.getElementsByClassName('showList')[0].innerHTML = data
+                    }
+                )
+                // 如果代码不能正常执行，即运行下面的函数，这里只做简单的输出
+                .catch(
+                    (reason) => {
+                        console.log(reason)
+                    }
+                )
+
+        }
+    </script>
+</body>
+
+</html>
